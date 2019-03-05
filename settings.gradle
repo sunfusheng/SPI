@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':module-a', ':module-b', ':spi-annotation', ':spi-api', ':spi-compiler'
