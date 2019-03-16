@@ -2,6 +2,6 @@ include ':spi-annotation',
         ':spi-api',
         ':spi-compiler',
         ':app',
-        ':module-interfaces',
+        ':common-interfaces',
         ':module-a',
         ':module-b'

@@ -27,7 +27,7 @@ dependencies {
     implementation project(':spi-api')
     annotationProcessor project(':spi-compiler')
 
-    implementation project(':module-interfaces')
+    implementation project(':common-interfaces')
     implementation project(':module-a')
     implementation project(':module-b')
 }
