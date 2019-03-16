@@ -1,5 +1,6 @@
 package com.sunfusheng.spi.api;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
@@ -9,7 +10,8 @@ import java.util.Set;
  * @author sunfusheng on 2019/3/16.
  */
 public class ServiceProvider {
-    static Context mContext;
+    @SuppressLint("StaticFieldLeak")
+    private static Context mContext;
 
     public static synchronized void init(Application application) {
         mContext = application;

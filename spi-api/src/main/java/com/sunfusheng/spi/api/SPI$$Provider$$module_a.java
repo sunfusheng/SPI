@@ -5,6 +5,6 @@ package com.sunfusheng.spi.api;
  */
 public class SPI$$Provider$$module_a {
     public static void register(ProvidersRegistry registry) {
-        registry.register("", Object.class);
+        registry.register("", "");
     }
 }
