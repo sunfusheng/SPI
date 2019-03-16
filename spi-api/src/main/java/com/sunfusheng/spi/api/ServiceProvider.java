@@ -21,8 +21,8 @@ public class ServiceProvider {
     }
 
     private static synchronized void register() {
-//        SPI$$Provider$$module_a.register(ProvidersPool.providerRegister);
-//        SPI$$Provider$$module_b.register(ProvidersPool.providerRegister);
+        SPI$$Provider$$module_a.register(ProvidersPool.registry);
+//        SPI$$Provider$$module_b.register(ProvidersPool.registry);
     }
 
     public static Set<Class<?>> getProviders(String key) {

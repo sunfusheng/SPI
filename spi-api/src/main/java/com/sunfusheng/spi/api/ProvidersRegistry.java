@@ -4,6 +4,6 @@ package com.sunfusheng.spi.api;
  * @author sunfusheng on 2019/3/16.
  */
 @FunctionalInterface
-public interface ProvidersRegister {
+public interface ProvidersRegistry {
     void register(String key, Class<?> value);
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 class ProvidersPool {
     static Map<String, Set<Class<?>>> providers = new HashMap<>();
 
-    static ProvidersRegister providerRegister = (key, value) -> {
+    static ProvidersRegistry registry = (key, value) -> {
         if (!TextUtils.isEmpty(key) && value != null) {
             Set<Class<?>> classes = providers.get(key);
             if (classes == null) {
