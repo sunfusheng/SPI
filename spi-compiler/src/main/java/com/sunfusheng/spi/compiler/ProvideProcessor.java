@@ -106,10 +106,6 @@ public class ProvideProcessor extends AbstractProcessor {
 
     private Map<String, String> createdFileMap = new HashMap<>();
 
-    private void generateCode() {
-
-    }
-
     // 过滤被注解的元素
     private boolean filterElement(Element element) {
         if (element != null && element.getKind() == ElementKind.CLASS && element.getAnnotation(Provide.class) != null) {
