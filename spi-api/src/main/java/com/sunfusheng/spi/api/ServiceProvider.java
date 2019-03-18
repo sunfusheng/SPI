@@ -3,7 +3,10 @@ package com.sunfusheng.spi.api;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,12 +25,20 @@ public class ServiceProvider {
         ProvidersPool.providers.clear();
     }
 
-    private static synchronized void register() {
-        SPI$$Provider$$module_a.register(ProvidersPool.registry);
-//        SPI$$Provider$$module_b.register(ProvidersPool.registry);
+    private static void register() {
+//        SPI$$Provider$$com_sunfusheng_spi_module_a.register(ProvidersPool.registry);
+//        SPI$$Provider$$com_sunfusheng_spi_module_b.register(ProvidersPool.registry);
     }
 
-    public static Set<Class<?>> getProviders(String key) {
-        return ProvidersPool.providers.get(key);
+    @NonNull
+    public static List<Class<?>> getProviders(String key) {
+        Set<Class<?>> classSet = ProvidersPool.providers.get(key);
+        List<Class<?>> classList;
+        if (classSet != null && classSet.size() > 0) {
+            classList = new ArrayList<>(classSet);
+        } else {
+            classList = new ArrayList<>();
+        }
+        return classList;
     }
 }
