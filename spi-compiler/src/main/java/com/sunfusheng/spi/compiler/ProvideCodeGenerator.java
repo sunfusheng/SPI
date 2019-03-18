@@ -43,6 +43,8 @@ public class ProvideCodeGenerator {
     public static final String CLASS_PROVIDER_REGISTRY = "ProvidersRegistry";
     public static final String PARAM_REGISTRY = "registry";
 
+    private static final ClassName providersRegistryClass = ClassName.get(PATH_OF_SPI_API, CLASS_PROVIDER_REGISTRY);
+
     private Filer mFiler;
     private Elements mElementUtils;
     private Messager mMessager;
@@ -57,7 +59,6 @@ public class ProvideCodeGenerator {
         printNote("### Found providers, size is " + elements.size());
         String packageName = null;
 
-        ClassName providersRegistryClass = ClassName.get(PATH_OF_SPI_API, CLASS_PROVIDER_REGISTRY);
         ParameterSpec registryParamSpec = ParameterSpec.builder(providersRegistryClass, PARAM_REGISTRY).build();
         MethodSpec.Builder registerMethodSpec = MethodSpec.methodBuilder(METHOD_REGISTER)
                 .addModifiers(PUBLIC, STATIC)
