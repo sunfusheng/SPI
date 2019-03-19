@@ -81,12 +81,11 @@ public class ProvideCodeGenerator {
         try {
             String generateFileName = PROJECT_PROVIDER + packageName;
             generateFileName = generateFileName.replaceAll("[^0-9a-zA-Z_$]+", "_");
-            JavaFile.builder(PACKAGE_OF_GENERATE_FILE,
-                    TypeSpec.classBuilder(generateFileName)
-                            .addJavadoc(DOC_OF_GENERATE_FILE)
-                            .addModifiers(PUBLIC)
-                            .addMethod(registerMethodSpec.build())
-                            .build()
+            JavaFile.builder(PACKAGE_OF_GENERATE_FILE, TypeSpec.classBuilder(generateFileName)
+                    .addJavadoc(DOC_OF_GENERATE_FILE)
+                    .addModifiers(PUBLIC)
+                    .addMethod(registerMethodSpec.build())
+                    .build()
             ).build().writeTo(mFiler);
         } catch (IOException e) {
             e.printStackTrace();
