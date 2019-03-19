@@ -1,0 +1,45 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile 'com.android.tools.build:gradle:3.3.2'
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+def groupId = 'com.sunfusheng.spi'
+def artifactId = 'register'
+def version = '1.0.0'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = groupId
+            pom.artifactId = artifactId
+            pom.version = version
+            repository(url: uri('../local_maven'))
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from project.sourceSets.main.groovy.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: groovydoc) {
+    classifier = 'javadoc'
+    from groovydoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

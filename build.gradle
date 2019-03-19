@@ -1,10 +1,12 @@
 buildscript {
     repositories {
+        maven { url './local_maven' }
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.sunfusheng.spi:register:1.0.0'
     }
 }
 

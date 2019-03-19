@@ -56,7 +56,7 @@ public class ProvideCodeGenerator {
     }
 
     public void generateCode(Set<? extends Element> elements) {
-        printNote("### Found providers, size is " + elements.size());
+        printNote("Found providers, size is " + elements.size());
         String packageName = null;
 
         ParameterSpec registryParamSpec = ParameterSpec.builder(providersRegistryClass, PARAM_REGISTRY).build();
@@ -72,9 +72,9 @@ public class ProvideCodeGenerator {
             packageName = getPublicPackageName(packageName, mElementUtils.getPackageOf(element).getQualifiedName().toString());
             String className = typeElement.getQualifiedName().toString();
             String annotationValue = getProviderAnnotationValue(element);
-            printNote("### packageName: " + packageName);
-            printNote("### className: " + className);
-            printNote("### annotationValue: " + annotationValue);
+            printNote("packageName: " + packageName);
+            printNote("className: " + className);
+            printNote("annotationValue: " + annotationValue);
             registerMethodSpec.addStatement("registry.register($S, $S)", annotationValue, className);
         }
 
@@ -115,7 +115,7 @@ public class ProvideCodeGenerator {
 
     // 输出提示信息
     private void printNote(String msg, Object... args) {
-        mMessager.printMessage(Diagnostic.Kind.NOTE, String.format(msg, args));
+        mMessager.printMessage(Diagnostic.Kind.NOTE, String.format("【spi-compiler】" + msg, args));
     }
 
     // 获取两个包名字符串公共的包名
