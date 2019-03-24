@@ -62,6 +62,8 @@ class RegisterTransform extends Transform {
                 FileUtils.copyDirectory(directoryInput.file, destDir)
             }
         }
+
+        mCodeGenerator.insertRegisterCode()
     }
 
 

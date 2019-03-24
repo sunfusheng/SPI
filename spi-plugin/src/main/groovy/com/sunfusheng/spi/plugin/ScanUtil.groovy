@@ -12,8 +12,7 @@ import java.util.jar.JarFile
 /**
  * @author by sunfusheng on 2019/3/19
  */
-public class ScanUtil {
-
+class ScanUtil {
     static final String PACKAGE_OF_PROVIDERS = 'com/sunfusheng/spi/providers/'
 
     static boolean shouldProcessJarOrDir(String name) {
@@ -28,10 +27,13 @@ public class ScanUtil {
                 JarEntry jarEntry = enumeration.nextElement()
                 String entryName = jarEntry.getName()
                 if (entryName.startsWith(PACKAGE_OF_PROVIDERS)) {
-                    println '【spi-plugin】entryName:' + entryName
+                    println '【spi-plugin】PACKAGE_OF_PROVIDERS entryName:' + entryName
                     InputStream inputStream = jarFile.getInputStream(jarEntry)
                     scanInputStream(inputStream)
                     inputStream.close()
+                } else if (entryName.startsWith(RegisterCodeGenerator.GENERATE_TO_CLASS_NAME)) {
+                    println '【spi-plugin】GENERATE_TO_CLASS_NAME fileName:' + file.name
+                    RegisterCodeGenerator.mServiceProviderFile = file
                 }
             }
             jarFile.close()
@@ -58,6 +60,9 @@ public class ScanUtil {
         void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
             super.visit(version, access, name, signature, superName, interfaces)
             println '【spi-plugin】className:' + name
+            if (name != null && name.startsWith(PACKAGE_OF_PROVIDERS)) {
+                RegisterCodeGenerator.mProvidersList.add(name)
+            }
         }
     }
 }
