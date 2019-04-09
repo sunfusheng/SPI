@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +16,18 @@ import java.util.Set;
 public class ServiceProvider {
     @SuppressLint("StaticFieldLeak")
     private static Context mContext;
+    private static boolean isInitialized = false;
 
     public static synchronized void init(Application application) {
         mContext = application;
         register();
+        isInitialized = true;
+        Log.d("sfs", "ServiceProvider::init()");
     }
 
     public static synchronized void destroy() {
         ProvidersPool.providers.clear();
+        isInitialized = false;
     }
 
     private static void register() {
@@ -32,6 +37,9 @@ public class ServiceProvider {
 
     @NonNull
     public static List<Class<?>> getProviders(Class clazz) {
+        if (!isInitialized) {
+            throw new RuntimeException("Please initialize first!");
+        }
         Set<Class<?>> classSet = ProvidersPool.providers.get(clazz.getCanonicalName());
         List<Class<?>> classList;
         if (classSet != null && classSet.size() > 0) {

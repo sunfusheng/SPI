@@ -2,6 +2,8 @@ package com.sunfusheng.spi.demo;
 
 import android.app.Application;
 
+import com.sunfusheng.spi.api.ServiceProvider;
+
 /**
  * @author by sunfusheng on 2019/3/14
  */
@@ -10,6 +12,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ServiceProvider.init(this);
     }
 
     @Override
