@@ -31,8 +31,8 @@ public class ServiceProvider {
     }
 
     @NonNull
-    public static List<Class<?>> getProviders(String key) {
-        Set<Class<?>> classSet = ProvidersPool.providers.get(key);
+    public static List<Class<?>> getProviders(Class clazz) {
+        Set<Class<?>> classSet = ProvidersPool.providers.get(clazz.getCanonicalName());
         List<Class<?>> classList;
         if (classSet != null && classSet.size() > 0) {
             classList = new ArrayList<>(classSet);
