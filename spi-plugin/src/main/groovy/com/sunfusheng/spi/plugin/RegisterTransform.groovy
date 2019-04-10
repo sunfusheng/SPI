@@ -2,6 +2,7 @@ package com.sunfusheng.spi.plugin
 
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
+import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
@@ -45,12 +46,19 @@ class RegisterTransform extends Transform {
 
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
-                def destFile = outputProvider.getContentLocation(jarInput.name, jarInput.contentTypes, jarInput.scopes, Format.JAR)
-                if (ScanUtil.shouldProcessJarOrDir(jarInput.name)) {
-                    println '【spi-plugin】jarName:' + jarInput.name + ' jarPath:' + jarInput.file.absolutePath
-                    ScanUtil.scanJar(jarInput.file)
+                String destName = jarInput.name
+                def hexName = DigestUtils.md5Hex(jarInput.file.absolutePath)
+                if (destName.endsWith(".jar")) {
+                    destName = destName.substring(0, destName.length() - 4)
                 }
-                FileUtils.copyFile(jarInput.file, destFile)
+                File srcFile = jarInput.file
+                File destFile = outputProvider.getContentLocation(destName + "_" + hexName, jarInput.contentTypes, jarInput.scopes, Format.JAR)
+                if (ScanUtil.shouldProcessJarOrDir(jarInput.name)) {
+                    println '【spi-plugin】jarName:' + destName + ' jarPath:' + jarInput.file.absolutePath
+                    ScanUtil.scanJar(srcFile, destFile)
+                }
+                println '【spi-plugin】destFileName:' + destFile.name + ' destFilePath:' + destFile.absolutePath
+                FileUtils.copyFile(srcFile, destFile)
             }
 
             input.directoryInputs.each { DirectoryInput directoryInput ->

@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class ServiceProvider {
     static final String TAG = "SPI";
-    private static boolean isInitialized = false;
+    static boolean isInitialized = false;
 
     public static synchronized void init() {
         Log.d(TAG, "ServiceProvider::init()");

@@ -7,6 +7,7 @@ import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.zip.ZipEntry
+
 /**
  * @author by sunfusheng on 2019/3/19
  */
@@ -105,7 +106,6 @@ class RegisterCodeGenerator {
         void visitInsn(int opcode) {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
                 mProvidersList.each { provider ->
-                    provider = provider.replaceAll("/", ".")
                     println '【spi-plugin】 visitInsn() provider: ' + provider
                     mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/api/ProvidersPool",
                             "registry",
@@ -115,13 +115,13 @@ class RegisterCodeGenerator {
                             "(Lcom/sunfusheng/spi/api/ProvidersRegistry;)V",
                             false)
                 }
-                super.visitInsn(opcode)
             }
+            super.visitInsn(opcode)
         }
 
         @Override
         void visitMaxs(int maxStack, int maxLocals) {
-            super.visitMaxs(maxStack + 1, maxLocals)
+            super.visitMaxs(maxStack + 4, maxLocals)
         }
     }
 }

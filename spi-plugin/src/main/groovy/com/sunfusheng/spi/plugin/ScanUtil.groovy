@@ -19,9 +19,9 @@ class ScanUtil {
         return !name.startsWith('com.android.support') && !name.startsWith('android.arch')
     }
 
-    static void scanJar(File file) {
-        if (file) {
-            def jarFile = new JarFile(file)
+    static void scanJar(File srcFile, File destFile) {
+        if (srcFile) {
+            def jarFile = new JarFile(srcFile)
             Enumeration<JarEntry> enumeration = jarFile.entries()
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = enumeration.nextElement()
@@ -32,8 +32,8 @@ class ScanUtil {
                     scanInputStream(inputStream)
                     inputStream.close()
                 } else if (entryName.startsWith(RegisterCodeGenerator.GENERATE_TO_CLASS_NAME)) {
-                    println '【spi-plugin】GENERATE_TO_CLASS_NAME fileName:' + file.name
-                    RegisterCodeGenerator.mServiceProviderFile = file
+                    println '【spi-plugin】GENERATE_TO_CLASS_NAME destFileName:' + destFile.name
+                    RegisterCodeGenerator.mServiceProviderFile = destFile
                 }
             }
             jarFile.close()
@@ -59,8 +59,8 @@ class ScanUtil {
 
         void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
             super.visit(version, access, name, signature, superName, interfaces)
-            println '【spi-plugin】className:' + name
-            if (name != null && name.startsWith(PACKAGE_OF_PROVIDERS)) {
+            if (name != null && name.startsWith(PACKAGE_OF_PROVIDERS) && !RegisterCodeGenerator.mProvidersList.contains(name)) {
+                println '【spi-plugin】className:' + name
                 RegisterCodeGenerator.mProvidersList.add(name)
             }
         }
