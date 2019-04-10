@@ -21,6 +21,7 @@ public class ServiceProvider {
     }
 
     public static synchronized void destroy() {
+        Log.d(TAG, "ServiceProvider::destroy()");
         ProvidersPool.providers.clear();
         isInitialized = false;
     }
@@ -29,18 +30,18 @@ public class ServiceProvider {
     }
 
     @NonNull
-    public static List<Class<?>> getProviders(Class clazz) {
+    public static <T> List<Class<T>> getProviders(Class<T> clazz) {
         if (!isInitialized) {
             init();
         }
 
-        Set<Class<?>> classSet = ProvidersPool.providers.get(clazz.getCanonicalName());
-        List<Class<?>> classList;
-        if (classSet != null && classSet.size() > 0) {
-            classList = new ArrayList<>(classSet);
-        } else {
-            classList = new ArrayList<>();
+        List<Class<T>> clazzList = new ArrayList<>();
+        Set<Class<?>> clazzSet = ProvidersPool.providers.get(clazz.getCanonicalName());
+        if (clazzSet != null && clazzSet.size() > 0) {
+            for (Class cls : clazzSet) {
+                clazzList.add(cls);
+            }
         }
-        return classList;
+        return clazzList;
     }
 }

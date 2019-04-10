@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Class<?>> absApplicationDelegateProviders = ServiceProvider.getProviders(AbsApplicationDelegate.class);
-        Log.d("sfs", "absApplicationDelegateProviders: " + absApplicationDelegateProviders);
+        List<Class<AbsApplicationDelegate>> providers1 = ServiceProvider.getProviders(AbsApplicationDelegate.class);
+        Log.d("sfs", "providers1: " + providers1);
 
-        List<Class<?>> iMainFragmentProviders = ServiceProvider.getProviders(IMainFragment.class);
-        Log.d("sfs", "iMainFragmentProviders: " + iMainFragmentProviders);
+        List<Class<IMainFragment>> providers2 = ServiceProvider.getProviders(IMainFragment.class);
+        Log.d("sfs", "providers2: " + providers2);
 
     }
 
