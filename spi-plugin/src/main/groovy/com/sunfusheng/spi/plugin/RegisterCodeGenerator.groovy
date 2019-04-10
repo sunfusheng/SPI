@@ -1,14 +1,12 @@
 package com.sunfusheng.spi.plugin
 
 import org.apache.commons.io.IOUtils
-import org.gradle.api.Project
 import org.objectweb.asm.*
 
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.zip.ZipEntry
-
 /**
  * @author by sunfusheng on 2019/3/19
  */
@@ -16,12 +14,10 @@ class RegisterCodeGenerator {
     static final String GENERATE_TO_CLASS_NAME = 'com/sunfusheng/spi/api/ServiceProvider.class'
     static final String GENERATE_TO_METHOD_NAME = 'register'
 
-    Project mProject
     static File mServiceProviderFile
     static List<String> mProvidersList = new ArrayList<>()
 
-    RegisterCodeGenerator(Project project) {
-        this.mProject = project
+    RegisterCodeGenerator() {
     }
 
     void insertRegisterCode() {

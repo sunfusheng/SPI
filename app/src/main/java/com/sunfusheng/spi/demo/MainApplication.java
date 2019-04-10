@@ -12,7 +12,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ServiceProvider.init(this);
+        ServiceProvider.init();
     }
 
     @Override
@@ -28,5 +28,6 @@ public class MainApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
+        ServiceProvider.destroy();
     }
 }

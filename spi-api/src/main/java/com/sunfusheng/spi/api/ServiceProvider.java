@@ -1,8 +1,5 @@
 package com.sunfusheng.spi.api;
 
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -14,15 +11,13 @@ import java.util.Set;
  * @author sunfusheng on 2019/3/16.
  */
 public class ServiceProvider {
-    @SuppressLint("StaticFieldLeak")
-    private static Context mContext;
+    static final String TAG = "SPI";
     private static boolean isInitialized = false;
 
-    public static synchronized void init(Application application) {
-        mContext = application;
+    public static synchronized void init() {
+        Log.d(TAG, "ServiceProvider::init()");
         register();
         isInitialized = true;
-        Log.d("sfs", "ServiceProvider::init()");
     }
 
     public static synchronized void destroy() {
@@ -31,15 +26,14 @@ public class ServiceProvider {
     }
 
     private static void register() {
-//        SPI$$Provider$$com_sunfusheng_spi_module_a.register(ProvidersPool.registry);
-//        SPI$$Provider$$com_sunfusheng_spi_module_b.register(ProvidersPool.registry);
     }
 
     @NonNull
     public static List<Class<?>> getProviders(Class clazz) {
         if (!isInitialized) {
-            throw new RuntimeException("Please initialize first!");
+            init();
         }
+
         Set<Class<?>> classSet = ProvidersPool.providers.get(clazz.getCanonicalName());
         List<Class<?>> classList;
         if (classSet != null && classSet.size() > 0) {

@@ -33,7 +33,7 @@ public class ProvideCodeGenerator {
 
     public static final String PROJECT = "SPI";
     public static final String PROVIDER = "Provider";
-    public static final String SEPARATOR = "$$";
+    public static final String SEPARATOR = "_";
     public static final String PROJECT_PROVIDER = PROJECT + SEPARATOR + PROVIDER + SEPARATOR;
 
     public static final String PACKAGE_OF_GENERATE_FILE = "com.sunfusheng.spi.providers";
