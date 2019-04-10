@@ -10,10 +10,10 @@ import java.util.Set;
 /**
  * @author by sunfusheng on 2019/3/14
  */
-public class ProvidersPool {
+class ProvidersPool {
     static Map<String, Set<Class<?>>> providers = new HashMap<>();
 
-    public static ProvidersRegistry registry = new ProvidersRegistry() {
+    static ProvidersRegistry registry = new ProvidersRegistry() {
         @Override
         public void register(String key, String value) {
             if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
