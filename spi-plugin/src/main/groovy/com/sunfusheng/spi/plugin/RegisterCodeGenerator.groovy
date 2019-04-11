@@ -18,13 +18,11 @@ class RegisterCodeGenerator {
     static File mServiceProviderFile
     static List<String> mProvidersList = new ArrayList<>()
 
-    RegisterCodeGenerator() {
-    }
-
-    void insertRegisterCode() {
+    static void insertRegisterCode() {
         if (mProvidersList != null && !mProvidersList.isEmpty() &&
                 mServiceProviderFile != null && mServiceProviderFile.name.endsWith(".jar")) {
-            insertRegisterCodeIntoJarFile(mServiceProviderFile)
+            RegisterCodeGenerator codeGenerator = new RegisterCodeGenerator()
+            codeGenerator.insertRegisterCodeIntoJarFile(mServiceProviderFile)
         }
     }
 

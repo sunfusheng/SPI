@@ -11,7 +11,7 @@ import java.util.Set;
  * @author by sunfusheng on 2019/3/14
  */
 class ProvidersPool {
-    static Map<String, Set<Class<?>>> providers = new HashMap<>();
+    static Map<String, Set<Object>> providers = new HashMap<>();
 
     static ProvidersRegistry registry = new ProvidersRegistry() {
         @Override
@@ -19,15 +19,17 @@ class ProvidersPool {
             if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
                 return;
             }
+
             try {
                 Class<?> clazz = Class.forName(value);
-                Set<Class<?>> classes = providers.get(key);
-                if (classes == null) {
-                    classes = new HashSet<>();
-                    providers.put(key, classes);
+                Object object = clazz.getConstructor().newInstance();
+                Set<Object> objectSet = providers.get(key);
+                if (objectSet == null) {
+                    objectSet = new HashSet<>();
+                    providers.put(key, objectSet);
                 }
-                classes.add(clazz);
-            } catch (ClassNotFoundException e) {
+                objectSet.add(object);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

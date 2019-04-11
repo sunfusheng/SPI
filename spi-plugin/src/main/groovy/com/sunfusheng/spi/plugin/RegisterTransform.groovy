@@ -3,19 +3,11 @@ package com.sunfusheng.spi.plugin
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import org.apache.commons.io.FileUtils
-import org.gradle.api.Project
 
 /**
  * @author by sunfusheng on 2019/3/19.
  */
 class RegisterTransform extends Transform {
-    Project mProject
-    RegisterCodeGenerator mCodeGenerator
-
-    RegisterTransform(Project project, RegisterCodeGenerator codeGenerator) {
-        this.mProject = project
-        this.mCodeGenerator = codeGenerator
-    }
 
     @Override
     String getName() {
@@ -40,9 +32,8 @@ class RegisterTransform extends Transform {
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
-
+        long startTime = System.currentTimeMillis()
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
-
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
                 File srcFile = jarInput.file
@@ -63,7 +54,7 @@ class RegisterTransform extends Transform {
                 FileUtils.copyDirectory(directoryInput.file, destDir)
             }
         }
-
-        mCodeGenerator.insertRegisterCode()
+        RegisterCodeGenerator.insertRegisterCode()
+        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime)+'ms'
     }
 }

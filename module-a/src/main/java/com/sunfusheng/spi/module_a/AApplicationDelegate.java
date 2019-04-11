@@ -12,10 +12,10 @@ import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
 @Provide(AbsApplicationDelegate.class)
 public class AApplicationDelegate extends AbsApplicationDelegate {
 
-    private static final String TAG = "AApplicationDelegate";
+    private static final String TAG = "SPI";
 
     @Override
     public void onCreate(Application application) {
-        Log.d(TAG, "onCreate()");
+        Log.d(TAG, "AApplicationDelegate::onCreate()");
     }
 }

@@ -11,8 +11,8 @@ import java.util.Set;
  * @author sunfusheng on 2019/3/16.
  */
 public class ServiceProvider {
-    static final String TAG = "SPI";
-    static boolean isInitialized = false;
+    private static final String TAG = "SPI";
+    private static boolean isInitialized = false;
 
     public static synchronized void init() {
         Log.d(TAG, "ServiceProvider::init()");
@@ -29,19 +29,20 @@ public class ServiceProvider {
     private static void register() {
     }
 
+    @SuppressWarnings("unchecked")
     @NonNull
-    public static <T> List<Class<T>> getProviders(Class<T> clazz) {
+    public static <T> List<T> getProviders(Class<T> clazz) {
         if (!isInitialized) {
             init();
         }
 
-        List<Class<T>> clazzList = new ArrayList<>();
-        Set<Class<?>> clazzSet = ProvidersPool.providers.get(clazz.getCanonicalName());
+        List<T> objects = new ArrayList<>();
+        Set<Object> clazzSet = ProvidersPool.providers.get(clazz.getCanonicalName());
         if (clazzSet != null && clazzSet.size() > 0) {
-            for (Class cls : clazzSet) {
-                clazzList.add(cls);
+            for (Object object : clazzSet) {
+                objects.add((T) object);
             }
         }
-        return clazzList;
+        return objects;
     }
 }

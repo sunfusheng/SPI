@@ -16,8 +16,7 @@ class RegisterPlugin implements Plugin<Project> {
         if (isApp) {
             println '【spi-plugin】is applied'
             def android = project.extensions.findByType(AppExtension.class)
-            RegisterCodeGenerator codeGenerator = new RegisterCodeGenerator()
-            android.registerTransform(new RegisterTransform(project, codeGenerator))
+            android.registerTransform(new RegisterTransform())
         }
     }
 }
