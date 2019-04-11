@@ -48,13 +48,24 @@ class RegisterTransform extends Transform {
             input.directoryInputs.each { DirectoryInput directoryInput ->
                 if (ScanUtil.shouldProcessJarOrDir(directoryInput.name)) {
                     println '【spi-plugin】dirName:' + directoryInput.name + ' dirPath:' + directoryInput.file.absolutePath
-                }
+                    def dirPath = directoryInput.file.absolutePath
+                    if (!dirPath.endsWith(File.separator)) {
+                        dirPath += File.separator
+                    }
 
+                    directoryInput.file.eachFileRecurse { File file ->
+                        def filePath = file.absolutePath.replace(dirPath, '')
+                        if (filePath != null && filePath.startsWith(ScanUtil.PACKAGE_OF_PROVIDERS)) {
+                            println '【spi-plugin】fileName:' + file.name + ' filePath:' + filePath
+                            ScanUtil.scanFile(file)
+                        }
+                    }
+                }
                 def destDir = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
                 FileUtils.copyDirectory(directoryInput.file, destDir)
             }
         }
         RegisterCodeGenerator.insertRegisterCode()
-        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime)+'ms'
+        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime) + 'ms'
     }
 }

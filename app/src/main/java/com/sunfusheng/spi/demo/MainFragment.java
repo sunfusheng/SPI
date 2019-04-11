@@ -1,4 +1,4 @@
-package com.sunfusheng.spi.module_b;
+package com.sunfusheng.spi.demo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,10 +8,10 @@ import com.sunfusheng.spi.annotation.Provide;
 import com.sunfusheng.spi.module.interfaces.IMainFragment;
 
 /**
- * @author by sunfusheng on 2019/3/14
+ * @author by sunfusheng on 2019/4/11
  */
 @Provide(IMainFragment.class)
-public class BFragment extends Fragment implements IMainFragment {
+public class MainFragment extends Fragment implements IMainFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class BFragment extends Fragment implements IMainFragment {
 
     @Override
     public String tabName() {
-        return "BFragment";
+        return "MainFragment";
     }
 
     @Override

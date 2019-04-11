@@ -16,7 +16,11 @@ public class ServiceProvider {
 
     public static synchronized void init() {
         Log.d(TAG, "ServiceProvider::init()");
-        register();
+        try {
+            register();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         isInitialized = true;
     }
 

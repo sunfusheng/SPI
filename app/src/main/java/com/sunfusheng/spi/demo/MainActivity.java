@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.sunfusheng.spi.api.ServiceProvider;
 import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
-import com.sunfusheng.spi.module.interfaces.IMainTab;
+import com.sunfusheng.spi.module.interfaces.IMainFragment;
 
 import java.util.List;
 
@@ -21,15 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         List<AbsApplicationDelegate> applicationDelegates = ServiceProvider.getProviders(AbsApplicationDelegate.class);
-        sb.append("AbsApplicationDelegate List: ");
+        sb.append("【AbsApplicationDelegate List】: ");
         for (AbsApplicationDelegate delegate : applicationDelegates) {
-            sb.append("\n").append(delegate);
+            sb.append("\n").append(delegate.getClass().getSimpleName());
         }
 
-        List<IMainTab> mainTabs = ServiceProvider.getProviders(IMainTab.class);
-        sb.append("\n\nIMainTab List: ");
-        for (IMainTab tab : mainTabs) {
-            sb.append("\n").append(tab);
+        List<IMainFragment> mainFragments = ServiceProvider.getProviders(IMainFragment.class);
+        sb.append("\n\n【IMainFragment List】: ");
+        for (IMainFragment fragment : mainFragments) {
+            sb.append("\n").append(fragment.getClass().getSimpleName());
         }
 
         vInfo.setText(sb);
