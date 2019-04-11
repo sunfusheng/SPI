@@ -20,12 +20,6 @@ public class ServiceProvider {
         isInitialized = true;
     }
 
-    public static synchronized void destroy() {
-        Log.d(TAG, "ServiceProvider::destroy()");
-        ProvidersPool.providers.clear();
-        isInitialized = false;
-    }
-
     private static void register() {
     }
 
@@ -44,5 +38,11 @@ public class ServiceProvider {
             }
         }
         return objects;
+    }
+
+    public static synchronized void destroy() {
+        Log.d(TAG, "ServiceProvider::destroy()");
+        ProvidersPool.providers.clear();
+        isInitialized = false;
     }
 }

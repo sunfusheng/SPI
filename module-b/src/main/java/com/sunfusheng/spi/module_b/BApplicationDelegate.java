@@ -12,10 +12,8 @@ import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
 @Provide(AbsApplicationDelegate.class)
 public class BApplicationDelegate extends AbsApplicationDelegate {
 
-    private static final String TAG = "SPI";
-
     @Override
     public void onCreate(Application application) {
-        Log.d(TAG, "BApplicationDelegate::onCreate()");
+        Log.d("SPI", "BApplicationDelegate::onCreate()");
     }
 }

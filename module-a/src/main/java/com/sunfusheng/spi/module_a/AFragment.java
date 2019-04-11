@@ -5,13 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.sunfusheng.spi.annotation.Provide;
-import com.sunfusheng.spi.module.interfaces.IMainFragment;
+import com.sunfusheng.spi.module.interfaces.IMainTab;
 
 /**
  * @author by sunfusheng on 2019/3/14
  */
-@Provide(IMainFragment.class)
-public class AFragment extends Fragment implements IMainFragment {
+@Provide(IMainTab.class)
+public class AFragment extends Fragment implements IMainTab {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
