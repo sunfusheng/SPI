@@ -40,7 +40,6 @@ class RegisterCodeGenerator {
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement()
                 String entryName = jarEntry.getName()
-                println '【spi-plugin】 insertInitCodeIntoJarFile() entryName: ' + entryName
                 ZipEntry zipEntry = new ZipEntry(entryName)
                 InputStream inputStream = file.getInputStream(jarEntry)
                 jarOutputStream.putNextEntry(zipEntry)
@@ -60,7 +59,6 @@ class RegisterCodeGenerator {
                 jarFile.delete()
             }
             optJar.renameTo(jarFile)
-            println '【spi-plugin】 jarFile.absolutePath: ' + jarFile.absolutePath
         }
         return jarFile
     }
@@ -76,7 +74,6 @@ class RegisterCodeGenerator {
     class ServiceProviderClassVisitor extends ClassVisitor {
         ServiceProviderClassVisitor(int api, ClassVisitor cv) {
             super(api, cv)
-            println '【spi-plugin】 ServiceProviderClassVisitor'
         }
 
         void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
@@ -86,7 +83,6 @@ class RegisterCodeGenerator {
         @Override
         MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions)
-            println '【spi-plugin】 visitMethod() name: ' + name
             if (name == GENERATE_TO_METHOD_NAME) {
                 mv = new RegisterMethodVisitor(Opcodes.ASM6, mv)
             }
@@ -97,14 +93,12 @@ class RegisterCodeGenerator {
     class RegisterMethodVisitor extends MethodVisitor {
         RegisterMethodVisitor(int api, MethodVisitor mv) {
             super(api, mv)
-            println '【spi-plugin】 RegisterMethodVisitor'
         }
 
         @Override
         void visitInsn(int opcode) {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
                 mProvidersList.each { provider ->
-                    println '【spi-plugin】 visitInsn() provider: ' + provider
                     mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/api/ProvidersPool",
                             "registry",
                             "Lcom/sunfusheng/spi/api/ProvidersRegistry;")
@@ -115,11 +109,6 @@ class RegisterCodeGenerator {
                 }
             }
             super.visitInsn(opcode)
-        }
-
-        @Override
-        void visitMaxs(int maxStack, int maxLocals) {
-            super.visitMaxs(maxStack + 4, maxLocals)
         }
     }
 }
