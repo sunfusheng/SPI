@@ -33,6 +33,7 @@ class RegisterTransform extends Transform {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
         long startTime = System.currentTimeMillis()
+        RegisterCodeGenerator.mProvidersList.clear()
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
