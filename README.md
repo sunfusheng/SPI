@@ -1,4 +1,6 @@
-# SPI [ ![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg?version=1.0.0) ](https://bintray.com/sfsheng0322/maven/spi-annotation/1.0.0/link)
+# SPI [ ![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion)
+
+Android开发中SPI的应用
 
 #### Gradle:
 
@@ -18,8 +20,8 @@
     }
 
     // module
-    api 'com.sunfusheng:spi-annotation:<latest-version>'
-    api 'com.sunfusheng:spi-api:<latest-version>'
+    implementation 'com.sunfusheng:spi-annotation:<latest-version>'
+    implementation 'com.sunfusheng:spi-api:<latest-version>'
     annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
 
 <br/>
