@@ -1,4 +1,4 @@
-# SPI [ ![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion)
+# SPI [spi-annotation](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion)
 
 Android开发中SPI的应用
 
