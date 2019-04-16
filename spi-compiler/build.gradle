@@ -10,3 +10,14 @@ dependencies {
     implementation 'com.squareup:javapoet:1.11.1'
     implementation project(':spi-annotation')
 }
+
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'sfsheng0322'
+    groupId = 'com.sunfusheng'
+    artifactId = 'spi-compiler'
+    publishVersion = rootProject.versionName
+    desc = 'SPI Compiler'
+    website = 'https://github.com/sunfusheng/SPI'
+}

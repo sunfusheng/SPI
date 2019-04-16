@@ -1,1 +1,11 @@
 apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'sfsheng0322'
+    groupId = 'com.sunfusheng'
+    artifactId = 'spi-annotation'
+    publishVersion = rootProject.versionName
+    desc = 'SPI Annotation'
+    website = 'https://github.com/sunfusheng/SPI'
+}

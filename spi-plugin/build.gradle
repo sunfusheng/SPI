@@ -14,32 +14,41 @@ repositories {
     mavenCentral()
 }
 
-def groupId = 'com.sunfusheng.spi'
-def artifactId = 'register'
-def version = '1.0.0'
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.groupId = groupId
-            pom.artifactId = artifactId
-            pom.version = version
-            repository(url: uri('../local_maven'))
+if (rootProject.isLocalDevelop) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.groupId = 'com.sunfusheng'
+                pom.artifactId = 'spi-plugin'
+                pom.version = rootProject.versionName
+                repository(url: uri('../local_maven'))
+            }
         }
     }
-}
 
-task sourcesJar(type: Jar) {
-    from project.sourceSets.main.groovy.srcDirs
-    classifier = 'sources'
-}
+    task sourcesJar(type: Jar) {
+        from project.sourceSets.main.groovy.srcDirs
+        classifier = 'sources'
+    }
 
-task javadocJar(type: Jar, dependsOn: groovydoc) {
-    classifier = 'javadoc'
-    from groovydoc.destinationDir
-}
+    task javadocJar(type: Jar, dependsOn: groovydoc) {
+        classifier = 'javadoc'
+        from groovydoc.destinationDir
+    }
 
-artifacts {
-    archives javadocJar
-    archives sourcesJar
+    artifacts {
+        archives javadocJar
+        archives sourcesJar
+    }
+} else {
+    apply plugin: 'com.novoda.bintray-release'
+
+    publish {
+        userOrg = 'sfsheng0322'
+        groupId = 'com.sunfusheng'
+        artifactId = 'spi-plugin'
+        publishVersion = rootProject.versionName
+        desc = 'SPI Plugin'
+        website = 'https://github.com/sunfusheng/SPI'
+    }
 }
