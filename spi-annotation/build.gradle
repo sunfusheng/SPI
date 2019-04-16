@@ -5,7 +5,7 @@ publish {
     userOrg = 'sfsheng0322'
     groupId = 'com.sunfusheng'
     artifactId = 'spi-annotation'
-    publishVersion = rootProject.versionName
+    publishVersion = VERSION_NAME
     desc = 'SPI Annotation'
     website = 'https://github.com/sunfusheng/SPI'
 }

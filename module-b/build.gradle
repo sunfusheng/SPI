@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion COMPILE_SDK_VERSION
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
 
     buildTypes {
@@ -19,16 +19,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
 
-    if (rootProject.isLocalDevelop) {
+    if (isLocalDevelop) {
         implementation project(':spi-annotation')
         implementation project(':spi-api')
         annotationProcessor project(':spi-compiler')
     } else {
-        implementation 'com.sunfusheng:spi-annotation:' + rootProject.versionName
-        implementation 'com.sunfusheng:spi-api:' + rootProject.versionName
-        annotationProcessor 'com.sunfusheng:spi-compiler:' + rootProject.versionName
+        implementation 'com.sunfusheng:spi-annotation:' + VERSION_NAME
+        implementation 'com.sunfusheng:spi-api:' + VERSION_NAME
+        annotationProcessor 'com.sunfusheng:spi-compiler:' + VERSION_NAME
     }
 
     implementation project(':common-interfaces')

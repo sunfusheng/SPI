@@ -1,11 +1,10 @@
-# SPI
-[ ![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion)
+# SPI [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
 
 Android开发中SPI的应用
 
 #### Gradle:
 
-    // project
+    // project gradle
     buildscript {
         repositories {
             maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
@@ -20,10 +19,14 @@ Android开发中SPI的应用
         }
     }
 
-    // module
-    implementation 'com.sunfusheng:spi-annotation:<latest-version>'
-    implementation 'com.sunfusheng:spi-api:<latest-version>'
-    annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
+    // module gradle
+    apply plugin: 'com.sunfusheng.spi'
+    dependencies {
+        // ...
+        implementation 'com.sunfusheng:spi-annotation:<latest-version>'
+        implementation 'com.sunfusheng:spi-api:<latest-version>'
+        annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
+    }
 
 <br/>
 

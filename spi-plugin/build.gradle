@@ -14,13 +14,13 @@ repositories {
     mavenCentral()
 }
 
-if (rootProject.isLocalDevelop) {
+if (isLocalDevelop) {
     uploadArchives {
         repositories {
             mavenDeployer {
                 pom.groupId = 'com.sunfusheng'
                 pom.artifactId = 'spi-plugin'
-                pom.version = rootProject.versionName
+                pom.version = VERSION_NAME
                 repository(url: uri('../local_maven'))
             }
         }
@@ -47,7 +47,7 @@ if (rootProject.isLocalDevelop) {
         userOrg = 'sfsheng0322'
         groupId = 'com.sunfusheng'
         artifactId = 'spi-plugin'
-        publishVersion = rootProject.versionName
+        publishVersion = VERSION_NAME
         desc = 'SPI Plugin'
         website = 'https://github.com/sunfusheng/SPI'
     }

@@ -17,7 +17,7 @@ publish {
     userOrg = 'sfsheng0322'
     groupId = 'com.sunfusheng'
     artifactId = 'spi-compiler'
-    publishVersion = rootProject.versionName
+    publishVersion = VERSION_NAME
     desc = 'SPI Compiler'
     website = 'https://github.com/sunfusheng/SPI'
 }

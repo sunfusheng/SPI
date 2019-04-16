@@ -1,17 +1,14 @@
-ext {
-    isLocalDevelop = false
-}
-
 buildscript {
     repositories {
-//        if (isLocalDevelop) {
-//            maven { url './local_maven' }
-//        }
+        if (isLocalDevelop) {
+            maven { url './local_maven' }
+        }
         mavenCentral()
         google()
         jcenter()
         maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'com.novoda:bintray-release:0.9'
@@ -26,19 +23,19 @@ allprojects {
         jcenter()
         maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
     }
+
+    ext {
+        COMPILE_SDK_VERSION = 28
+        BUILD_TOOL_VERSION = '28.0.3'
+        SUPPORT_LIBRARY_VERSION = '28.0.0'
+
+        MIN_SDK_VERSION = 14
+        TARGET_SDK_VERSION = 28
+        VERSION_CODE = 1
+        VERSION_NAME = '1.0.0'
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.3'
-    supportLibraryVersion = '28.0.0'
-
-    minSdkVersion = 14
-    targetSdkVersion = 28
-    versionCode = 1
-    versionName = '1.0.0'
 }
