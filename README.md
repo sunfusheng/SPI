@@ -1,8 +1,8 @@
 # SPI [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
 
-Android开发中SPI的应用
+Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
 
-#### Gradle:
+### Gradle配置:
 
     // project gradle
     buildscript {
@@ -27,6 +27,7 @@ Android开发中SPI的应用
         implementation 'com.sunfusheng:spi-api:<latest-version>'
         annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
     }
+
 
 <br/>
 
