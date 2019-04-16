@@ -1,7 +1,23 @@
-# SPI
+# SPI [ ![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg?version=1.0.0) ](https://bintray.com/sfsheng0322/maven/spi-annotation/1.0.0/link)
 
 #### Gradle:
 
+    // project
+    buildscript {
+        repositories {
+            maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
+        }
+        dependencies {
+            classpath 'com.sunfusheng:spi-plugin:1.0.0'
+        }
+    }
+    allprojects {
+        repositories {
+            maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
+        }
+    }
+
+    // module
     api 'com.sunfusheng:spi-annotation:<latest-version>'
     api 'com.sunfusheng:spi-api:<latest-version>'
     annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
