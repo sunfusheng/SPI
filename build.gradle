@@ -6,7 +6,6 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
-        maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
     }
 
     dependencies {
@@ -21,7 +20,6 @@ allprojects {
         mavenCentral()
         google()
         jcenter()
-        maven { url 'https://dl.bintray.com/sfsheng0322/maven' }
     }
 
     ext {
