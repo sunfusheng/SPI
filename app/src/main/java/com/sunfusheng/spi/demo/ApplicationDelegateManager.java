@@ -11,7 +11,6 @@ import java.util.List;
  * @author by sunfusheng on 2019/4/11
  */
 public class ApplicationDelegateManager {
-
     private static final ApplicationDelegateManager mDelegatesManager = new ApplicationDelegateManager();
     private List<AbsApplicationDelegate> mDelegates;
 
