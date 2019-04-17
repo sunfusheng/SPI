@@ -4,7 +4,7 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
 
 ### Gradle配置:
 
-// project gradle
+#### project gradle
 
 ``` gradle
     dependencies {
@@ -13,7 +13,7 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
     }
 ```
 
-// module gradle
+#### module gradle
 
 ``` gradle
     apply plugin: 'com.sunfusheng.spi'
@@ -31,9 +31,9 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
 在组件化开发中，主工程（app module）会依赖各个子模块（sub module），有这么一个功能，我们会在主工程中初始化各个子模块，
 通常我们的做法是在主工程中分别调用每个子模块的初始化和反初始化方法，这时我将各个子模块的初始化类当成一种需要加载的服务，
 每个子模块的初始化类都继承一个抽象类或实现一个接口，这样我只需要在主模块中找到那些实现固定抽象类或接口的服务然后统一操作就可以了，
-具体分解下使用步骤如下：
+具体分解下使用步骤：
 
-#### 1、根据需求定义抽象类或接口
+#### 1、根据需求定义抽象类(abstract class)或接口(Interface)
 
 ``` java
     abstract public class AbsApplicationDelegate {
@@ -48,7 +48,7 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
     }
 ```
 
-#### 2、子模块实现类继承抽象类或实现接口并在添加注解@Provide(AbsApplicationDelegate.class)
+#### 2、子模块实现类继承抽象类或实现接口，并添加注解@Provide(AbsApplicationDelegate.class)
 
 ``` java
     @Provide(AbsApplicationDelegate.class)
@@ -61,7 +61,7 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
     }
 ```
 
-#### 3、主工程中实现所有服务的Providers管理
+#### 3、主工程中实现所有服务(Service)提供者(Provider)的管理
 
 ``` java
     public class ApplicationDelegateManager {
