@@ -1,6 +1,6 @@
 # SPI [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
 
-Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
+SPI (Service Provider Interface) 助力Android模块化开发
 
 ### Gradle配置:
 
