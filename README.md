@@ -4,6 +4,7 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
 
 ### Gradle配置:
 
+``` gradle
     // project gradle
     buildscript {
         repositories {
@@ -27,19 +28,13 @@ Android模块化开发中SPI的助力，SPI全名：Service Provider Interface
         implementation 'com.sunfusheng:spi-api:<latest-version>'
         annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
     }
-
+```
 
 <br/>
 
 ### 个人微信公众号
 
 <img src="http://ourvm0t8d.bkt.clouddn.com/wx_gongzhonghao.png">
-
-<br/>
-
-### 打点赏给作者加点油^_^
-
-<img src="http://ourvm0t8d.bkt.clouddn.com/wx_shoukuanma.png" >
 
 <br/>
 
