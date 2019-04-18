@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.sunfusheng.spi.api.ServiceProvider;
 import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
-import com.sunfusheng.spi.module.interfaces.IMainFragment;
+import com.sunfusheng.spi.module.interfaces.AbsMainFragment;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
             sb.append("\n").append(delegate.getClass().getSimpleName());
         }
 
-        List<IMainFragment> mainFragments = ServiceProvider.getProviders(IMainFragment.class);
+        List<AbsMainFragment> mainFragments = ServiceProvider.getProviders(AbsMainFragment.class);
         sb.append("\n\n【IMainFragment List】: ");
-        for (IMainFragment fragment : mainFragments) {
+        for (AbsMainFragment fragment : mainFragments) {
             sb.append("\n").append(fragment.getClass().getSimpleName());
         }
 

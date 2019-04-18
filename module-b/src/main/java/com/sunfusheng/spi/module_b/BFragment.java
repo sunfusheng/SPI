@@ -2,16 +2,15 @@ package com.sunfusheng.spi.module_b;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import com.sunfusheng.spi.annotation.Provide;
-import com.sunfusheng.spi.module.interfaces.IMainFragment;
+import com.sunfusheng.spi.module.interfaces.AbsMainFragment;
 
 /**
  * @author by sunfusheng on 2019/3/14
  */
-@Provide(IMainFragment.class)
-public class BFragment extends Fragment implements IMainFragment {
+@Provide(AbsMainFragment.class)
+public class BFragment extends AbsMainFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,22 +18,17 @@ public class BFragment extends Fragment implements IMainFragment {
     }
 
     @Override
-    public Fragment getFragment() {
-        return this;
-    }
-
-    @Override
-    public String tabName() {
+    protected String tabName() {
         return "BFragment";
     }
 
     @Override
-    public int tabIcon() {
+    protected int tabIcon() {
         return 0;
     }
 
     @Override
-    public boolean visible() {
+    protected boolean visible() {
         return true;
     }
 }

@@ -1,6 +1,6 @@
 # SPI [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
 
-SPI (Service Provider Interface) 助力Android模块化开发
+SPI (Service Provider Interface) 助力 Android 模块化开发
 
 ### Gradle配置:
 
@@ -8,7 +8,7 @@ SPI (Service Provider Interface) 助力Android模块化开发
 
 ``` gradle
     dependencies {
-        // ...
+        ...
         classpath 'com.sunfusheng:spi-plugin:<latest-version>'
     }
 ```
@@ -19,7 +19,7 @@ SPI (Service Provider Interface) 助力Android模块化开发
     apply plugin: 'com.sunfusheng.spi'
 
     dependencies {
-        // ...
+        ...
         implementation 'com.sunfusheng:spi-annotation:<latest-version>'
         implementation 'com.sunfusheng:spi-api:<latest-version>'
         annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
