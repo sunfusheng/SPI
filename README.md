@@ -83,34 +83,26 @@ SPI (Service Provider Interface) 助力 Android 模块化开发
         }
 
         public void onCreate(Application application) {
-            if (mDelegates.size() > 0) {
-                for (AbsApplicationDelegate delegate : mDelegates) {
-                    delegate.onCreate(application);
-                }
+            for (AbsApplicationDelegate delegate : mDelegates) {
+                delegate.onCreate(application);
             }
         }
 
         public void onLowMemory() {
-            if (mDelegates.size() > 0) {
-                for (AbsApplicationDelegate delegate : mDelegates) {
-                    delegate.onLowMemory();
-                }
+            for (AbsApplicationDelegate delegate : mDelegates) {
+                delegate.onLowMemory();
             }
         }
 
         public void onTrimMemory(int level) {
-            if (mDelegates.size() > 0) {
-                for (AbsApplicationDelegate delegate : mDelegates) {
-                    delegate.onTrimMemory(level);
-                }
+            for (AbsApplicationDelegate delegate : mDelegates) {
+                delegate.onTrimMemory(level);
             }
         }
 
         public void onTerminate() {
-            if (mDelegates.size() > 0) {
-                for (AbsApplicationDelegate delegate : mDelegates) {
-                    delegate.onTerminate();
-                }
+            for (AbsApplicationDelegate delegate : mDelegates) {
+                delegate.onTerminate();
             }
         }
     }
@@ -119,7 +111,7 @@ SPI (Service Provider Interface) 助力 Android 模块化开发
 #### 4、最后调用即可，也可以根据自己的需求解锁其他姿势
 
 ``` java
-    public class BaseApplication extends Application {
+    public class MyApplication extends Application {
 
         @Override
         public void onCreate() {

@@ -23,34 +23,26 @@ public class ApplicationDelegateManager {
     }
 
     public void onCreate(Application application) {
-        if (mDelegates.size() > 0) {
-            for (AbsApplicationDelegate delegate : mDelegates) {
-                delegate.onCreate(application);
-            }
+        for (AbsApplicationDelegate delegate : mDelegates) {
+            delegate.onCreate(application);
         }
     }
 
     public void onLowMemory() {
-        if (mDelegates.size() > 0) {
-            for (AbsApplicationDelegate delegate : mDelegates) {
-                delegate.onLowMemory();
-            }
+        for (AbsApplicationDelegate delegate : mDelegates) {
+            delegate.onLowMemory();
         }
     }
 
     public void onTrimMemory(int level) {
-        if (mDelegates.size() > 0) {
-            for (AbsApplicationDelegate delegate : mDelegates) {
-                delegate.onTrimMemory(level);
-            }
+        for (AbsApplicationDelegate delegate : mDelegates) {
+            delegate.onTrimMemory(level);
         }
     }
 
     public void onTerminate() {
-        if (mDelegates.size() > 0) {
-            for (AbsApplicationDelegate delegate : mDelegates) {
-                delegate.onTerminate();
-            }
+        for (AbsApplicationDelegate delegate : mDelegates) {
+            delegate.onTerminate();
         }
     }
 }
