@@ -14,7 +14,7 @@ repositories {
     mavenCentral()
 }
 
-if (isLocalDevelop) {
+if (isLocalDevelop.toBoolean()) {
     uploadArchives {
         repositories {
             mavenDeployer {

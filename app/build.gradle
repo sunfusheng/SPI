@@ -23,7 +23,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
 
-    if (isLocalDevelop) {
+    if (isLocalDevelop.toBoolean()) {
         implementation project(':spi-annotation')
         implementation project(':spi-api')
         annotationProcessor project(':spi-compiler')

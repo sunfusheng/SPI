@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        if (isLocalDevelop) {
+        if (isLocalDevelop.toBoolean()) {
             maven { url './local_maven' }
         }
         mavenCentral()
