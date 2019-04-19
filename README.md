@@ -6,10 +6,7 @@ SPI (Service Provider Interface) 助力 Android 组件化开发
 
 | spi-annotation | spi-api | spi-compiler | spi-plugin |
 | :--- | :--- | :--- | :--- |
-| [![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion)
-| [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
-| [![spi-compiler](https://api.bintray.com/packages/sfsheng0322/maven/spi-compiler/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-compiler/_latestVersion)
-| [![spi-plugin](https://api.bintray.com/packages/sfsheng0322/maven/spi-plugin/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-plugin/_latestVersion) |
+| [![spi-annotation](https://api.bintray.com/packages/sfsheng0322/maven/spi-annotation/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-annotation/_latestVersion) | [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion) | [![spi-compiler](https://api.bintray.com/packages/sfsheng0322/maven/spi-compiler/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-compiler/_latestVersion) | [![spi-plugin](https://api.bintray.com/packages/sfsheng0322/maven/spi-plugin/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-plugin/_latestVersion) |
 
 
 #### project gradle
