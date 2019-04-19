@@ -1,4 +1,4 @@
-# SPI [![spi-api](https://api.bintray.com/packages/sfsheng0322/maven/spi-api/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-api/_latestVersion)
+# SPI [![spi-core](https://api.bintray.com/packages/sfsheng0322/maven/spi-core/images/download.svg) ](https://bintray.com/sfsheng0322/maven/spi-core/_latestVersion)
 
 SPI (Service Provider Interface) 助力 Android 模块化开发
 
@@ -20,9 +20,7 @@ SPI (Service Provider Interface) 助力 Android 模块化开发
 
     dependencies {
         ...
-        implementation 'com.sunfusheng:spi-annotation:<latest-version>'
-        implementation 'com.sunfusheng:spi-api:<latest-version>'
-        annotationProcessor 'com.sunfusheng:spi-compiler:<latest-version>'
+        implementation 'com.sunfusheng:spi-core:<latest-version>'
     }
 ```
 
