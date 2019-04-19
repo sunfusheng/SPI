@@ -33,14 +33,12 @@ class RegisterTransform extends Transform {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
         long startTime = System.currentTimeMillis()
-        RegisterCodeGenerator.mProvidersList.clear()
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
                 File srcFile = jarInput.file
                 File destFile = outputProvider.getContentLocation(jarInput.name, jarInput.contentTypes, jarInput.scopes, Format.JAR)
                 if (ScanUtil.shouldProcessJarOrDir(jarInput.name)) {
-                    println '【spi-plugin】jarName:' + destFile.name + ' jarPath:' + destFile.absolutePath
                     ScanUtil.scanJar(srcFile, destFile)
                 }
                 FileUtils.copyFile(srcFile, destFile)
@@ -48,16 +46,8 @@ class RegisterTransform extends Transform {
 
             input.directoryInputs.each { DirectoryInput directoryInput ->
                 if (ScanUtil.shouldProcessJarOrDir(directoryInput.name)) {
-                    println '【spi-plugin】dirName:' + directoryInput.name + ' dirPath:' + directoryInput.file.absolutePath
-                    def dirPath = directoryInput.file.absolutePath
-                    if (!dirPath.endsWith(File.separator)) {
-                        dirPath += File.separator
-                    }
-
                     directoryInput.file.eachFileRecurse { File file ->
-                        def filePath = file.absolutePath.replace(dirPath, '')
-                        if (filePath != null && filePath.startsWith(ScanUtil.PACKAGE_OF_PROVIDERS)) {
-                            println '【spi-plugin】fileName:' + file.name + ' filePath:' + filePath
+                        if (ScanUtil.shouldProcessClass(file.name)) {
                             ScanUtil.scanFile(file)
                         }
                     }
@@ -67,6 +57,7 @@ class RegisterTransform extends Transform {
             }
         }
         RegisterCodeGenerator.insertRegisterCode()
-        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime) + 'ms'
+        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime) + 'ms | classes scanned: ' + ScanUtil.classesScanned
+        ScanUtil.classesScanned = 0
     }
 }

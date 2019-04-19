@@ -15,18 +15,18 @@ class RegisterCodeGenerator {
     static final String GENERATE_TO_CLASS_NAME = 'com/sunfusheng/spi/api/ServiceProvider.class'
     static final String GENERATE_TO_METHOD_NAME = 'register'
 
-    static File mServiceProviderFile
-    static List<String> mProvidersList = new ArrayList<>()
+    static File mServiceProviderFile = null
+    static Map<String, Set<String>> mProvidersMap = new HashMap<>()
 
     static void insertRegisterCode() {
-        if (mProvidersList != null && !mProvidersList.isEmpty() &&
-                mServiceProviderFile != null && mServiceProviderFile.name.endsWith(".jar")) {
-            RegisterCodeGenerator codeGenerator = new RegisterCodeGenerator()
-            codeGenerator.insertRegisterCodeIntoJarFile(mServiceProviderFile)
+        if (mServiceProviderFile != null && mServiceProviderFile.name.endsWith(".jar") && mProvidersMap != null && mProvidersMap.size() > 0) {
+            insertRegisterCodeIntoJarFile(mServiceProviderFile)
+            mServiceProviderFile = null
+            mProvidersMap.clear()
         }
     }
 
-    private File insertRegisterCodeIntoJarFile(File jarFile) {
+    private static void insertRegisterCodeIntoJarFile(File jarFile) {
         if (jarFile) {
             def optJar = new File(jarFile.getParent(), jarFile.name + ".opt")
             if (optJar.exists()) {
@@ -36,7 +36,6 @@ class RegisterCodeGenerator {
             def file = new JarFile(jarFile)
             Enumeration enumeration = file.entries()
             JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(optJar))
-
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement()
                 String entryName = jarEntry.getName()
@@ -54,16 +53,14 @@ class RegisterCodeGenerator {
             }
             jarOutputStream.close()
             file.close()
-
             if (jarFile.exists()) {
                 jarFile.delete()
             }
             optJar.renameTo(jarFile)
         }
-        return jarFile
     }
 
-    private byte[] visitServiceProviderAndInsertCode(InputStream inputStream) {
+    private static byte[] visitServiceProviderAndInsertCode(InputStream inputStream) {
         ClassReader cr = new ClassReader(inputStream)
         ClassWriter cw = new ClassWriter(cr, 0)
         ClassVisitor cv = new ServiceProviderClassVisitor(Opcodes.ASM6, cw)
@@ -71,13 +68,9 @@ class RegisterCodeGenerator {
         return cw.toByteArray()
     }
 
-    class ServiceProviderClassVisitor extends ClassVisitor {
+    private static class ServiceProviderClassVisitor extends ClassVisitor {
         ServiceProviderClassVisitor(int api, ClassVisitor cv) {
             super(api, cv)
-        }
-
-        void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-            super.visit(version, access, name, signature, superName, interfaces)
         }
 
         @Override
@@ -90,7 +83,7 @@ class RegisterCodeGenerator {
         }
     }
 
-    class RegisterMethodVisitor extends MethodVisitor {
+    private static class RegisterMethodVisitor extends MethodVisitor {
         RegisterMethodVisitor(int api, MethodVisitor mv) {
             super(api, mv)
         }
@@ -98,14 +91,17 @@ class RegisterCodeGenerator {
         @Override
         void visitInsn(int opcode) {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
-                mProvidersList.each { provider ->
-                    mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/api/ProvidersPool",
-                            "registry",
-                            "Lcom/sunfusheng/spi/api/ProvidersRegistry;")
-                    mv.visitMethodInsn(Opcodes.INVOKESTATIC, provider,
-                            "register",
-                            "(Lcom/sunfusheng/spi/api/ProvidersRegistry;)V",
-                            false)
+                mProvidersMap.each { Map.Entry<String, Set<String>> entry ->
+                    String key = entry.key
+                    Set<String> providersSet = entry.value
+                    if (providersSet != null && providersSet.size() > 0) {
+                        providersSet.each { provider ->
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/api/ProvidersPool", "registry", "Lcom/sunfusheng/spi/api/ProvidersRegistry;");
+                            mv.visitLdcInsn(key);
+                            mv.visitLdcInsn(provider);
+                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/sunfusheng/spi/api/ProvidersRegistry", "register", "(Ljava/lang/String;Ljava/lang/String;)V", true);
+                        }
+                    }
                 }
             }
             super.visitInsn(opcode)

@@ -1,4 +1,4 @@
-package com.sunfusheng.spi.annotation;
+package com.sunfusheng.spi.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

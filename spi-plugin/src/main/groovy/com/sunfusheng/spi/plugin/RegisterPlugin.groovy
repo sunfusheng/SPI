@@ -12,11 +12,9 @@ class RegisterPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        def isApp = project.plugins.hasPlugin(AppPlugin.class)
-        if (isApp) {
+        if (project.plugins.hasPlugin(AppPlugin.class)) {
             println '【spi-plugin】is applied'
-            def android = project.extensions.findByType(AppExtension.class)
-            android.registerTransform(new RegisterTransform())
+            project.extensions.findByType(AppExtension.class).registerTransform(new RegisterTransform())
         }
     }
 }

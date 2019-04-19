@@ -1,6 +1,4 @@
-include ':spi-annotation',
-        ':spi-api',
-        ':spi-compiler',
+include ':spi-core',
         ':spi-plugin',
         ':app',
         ':common-interfaces',

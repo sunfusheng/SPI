@@ -3,7 +3,7 @@ package com.sunfusheng.spi.module_a;
 import android.app.Application;
 import android.util.Log;
 
-import com.sunfusheng.spi.annotation.Provide;
+import com.sunfusheng.spi.api.Provide;
 import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
 
 /**
