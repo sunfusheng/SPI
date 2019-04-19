@@ -12,7 +12,7 @@ import java.util.zip.ZipEntry
  * @author by sunfusheng on 2019/3/19
  */
 class RegisterCodeGenerator {
-    static final String GENERATE_TO_CLASS_NAME = 'com/sunfusheng/spi/api/ServiceProvider.class'
+    static final String GENERATE_TO_CLASS_NAME = 'com/sunfusheng/spi/core/ServiceProvider.class'
     static final String GENERATE_TO_METHOD_NAME = 'register'
 
     static File mServiceProviderFile = null
@@ -96,10 +96,10 @@ class RegisterCodeGenerator {
                     Set<String> providersSet = entry.value
                     if (providersSet != null && providersSet.size() > 0) {
                         providersSet.each { provider ->
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/api/ProvidersPool", "registry", "Lcom/sunfusheng/spi/api/ProvidersRegistry;");
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/core/ProvidersPool", "registry", "Lcom/sunfusheng/spi/core/ProvidersRegistry;");
                             mv.visitLdcInsn(key);
                             mv.visitLdcInsn(provider);
-                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/sunfusheng/spi/api/ProvidersRegistry", "register", "(Ljava/lang/String;Ljava/lang/String;)V", true);
+                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/sunfusheng/spi/core/ProvidersRegistry", "register", "(Ljava/lang/String;Ljava/lang/String;)V", true);
                         }
                     }
                 }

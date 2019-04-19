@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.sunfusheng.spi.api.ServiceProvider;
+import com.sunfusheng.spi.core.ServiceProvider;
 import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
 import com.sunfusheng.spi.module.interfaces.AbsMainFragment;
 

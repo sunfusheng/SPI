@@ -2,7 +2,7 @@ package com.sunfusheng.spi.demo;
 
 import android.app.Application;
 
-import com.sunfusheng.spi.api.ServiceProvider;
+import com.sunfusheng.spi.core.ServiceProvider;
 import com.sunfusheng.spi.module.interfaces.AbsApplicationDelegate;
 
 import java.util.List;

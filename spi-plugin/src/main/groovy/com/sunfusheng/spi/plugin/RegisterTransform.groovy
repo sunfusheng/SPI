@@ -8,7 +8,6 @@ import org.apache.commons.io.FileUtils
  * @author by sunfusheng on 2019/3/19.
  */
 class RegisterTransform extends Transform {
-
     @Override
     String getName() {
         return 'RegisterTransform'
@@ -34,8 +33,8 @@ class RegisterTransform extends Transform {
         super.transform(transformInvocation)
         long startTime = System.currentTimeMillis()
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
-        transformInvocation.inputs.each { TransformInput input ->
-            input.jarInputs.each { JarInput jarInput ->
+        transformInvocation.inputs.each { TransformInput transformInput ->
+            transformInput.jarInputs.each { JarInput jarInput ->
                 File srcFile = jarInput.file
                 File destFile = outputProvider.getContentLocation(jarInput.name, jarInput.contentTypes, jarInput.scopes, Format.JAR)
                 if (ScanUtil.shouldProcessJarOrDir(jarInput.name)) {
@@ -44,20 +43,21 @@ class RegisterTransform extends Transform {
                 FileUtils.copyFile(srcFile, destFile)
             }
 
-            input.directoryInputs.each { DirectoryInput directoryInput ->
-                if (ScanUtil.shouldProcessJarOrDir(directoryInput.name)) {
-                    directoryInput.file.eachFileRecurse { File file ->
-                        if (ScanUtil.shouldProcessClass(file.name)) {
+            transformInput.directoryInputs.each { DirectoryInput dirInput ->
+                File srcFile = dirInput.file
+                def destDir = outputProvider.getContentLocation(dirInput.name, dirInput.contentTypes, dirInput.scopes, Format.DIRECTORY)
+                if (ScanUtil.shouldProcessJarOrDir(srcFile.name)) {
+                    srcFile.eachFileRecurse { File file ->
+                        if (ScanUtil.shouldProcessFile(file.name)) {
                             ScanUtil.scanFile(file)
                         }
                     }
                 }
-                def destDir = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
-                FileUtils.copyDirectory(directoryInput.file, destDir)
+                FileUtils.copyDirectory(srcFile, destDir)
             }
         }
         RegisterCodeGenerator.insertRegisterCode()
-        println '【spi-plugin】time used: ' + (System.currentTimeMillis() - startTime) + 'ms | classes scanned: ' + ScanUtil.classesScanned
+        println '【SPI】time used: ' + (System.currentTimeMillis() - startTime) + 'ms, classes scanned: ' + ScanUtil.classesScanned
         ScanUtil.classesScanned = 0
     }
 }

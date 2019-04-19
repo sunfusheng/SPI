@@ -2,7 +2,7 @@ package com.sunfusheng.spi.demo;
 
 import android.app.Application;
 
-import com.sunfusheng.spi.api.ServiceProvider;
+import com.sunfusheng.spi.core.ServiceProvider;
 
 /**
  * @author by sunfusheng on 2019/3/14

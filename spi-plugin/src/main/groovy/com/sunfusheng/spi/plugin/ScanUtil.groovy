@@ -1,6 +1,5 @@
 package com.sunfusheng.spi.plugin
 
-
 import org.objectweb.asm.*
 
 import java.util.jar.JarEntry
@@ -10,22 +9,22 @@ import java.util.jar.JarFile
  * @author by sunfusheng on 2019/3/19
  */
 class ScanUtil {
-    static final String ANNOTATION_PROVIDE_DESC = 'Lcom/sunfusheng/spi/api/Provide;'
+    static final String ANNOTATION_PROVIDE_DESC = 'Lcom/sunfusheng/spi/core/Provide;'
     static int classesScanned = 0
 
     static boolean shouldProcessJarOrDir(String name) {
         return name != null && !name.startsWith('com.android.support') && !name.startsWith('android.arch')
     }
 
-    static boolean shouldProcessClass(String name) {
+    static boolean shouldProcessFile(String name) {
         return name != null && name.endsWith('.class') &&
                 !name.endsWith('BuildConfig.class') &&
                 !name.startsWith('R$') &&
                 name != 'R.class' &&
-                name != 'com/sunfusheng/spi/api/Provide.class' &&
-                name != 'com/sunfusheng/spi/api/ProvidersPool$1.class' &&
-                name != 'com/sunfusheng/spi/api/ProvidersPool.class' &&
-                name != 'com/sunfusheng/spi/api/ProvidersRegistry.class'
+                name != 'com/sunfusheng/spi/core/Provide.class' &&
+                name != 'com/sunfusheng/spi/core/ProvidersPool$1.class' &&
+                name != 'com/sunfusheng/spi/core/ProvidersPool.class' &&
+                name != 'com/sunfusheng/spi/core/ProvidersRegistry.class'
     }
 
     static void scanJar(File srcFile, File destFile) {
@@ -36,10 +35,9 @@ class ScanUtil {
                 JarEntry jarEntry = enumeration.nextElement()
                 String jarElementName = jarEntry.name
                 if (jarElementName.startsWith(RegisterCodeGenerator.GENERATE_TO_CLASS_NAME)) {
-                    println '【spi-plugin】Contains ServiceProvider.class JarPath: ' + destFile.absolutePath
+                    println '【SPI】Contains ServiceProvider.class, JarPath: ' + destFile.absolutePath
                     RegisterCodeGenerator.mServiceProviderFile = destFile
-                } else if (shouldProcessClass(jarElementName)) {
-                    println '【spi-plugin】jarElementName: ' + jarElementName
+                } else if (shouldProcessFile(jarElementName)) {
                     InputStream inputStream = jarFile.getInputStream(jarEntry)
                     scanInputStream(inputStream)
                     inputStream.close()
@@ -50,7 +48,6 @@ class ScanUtil {
     }
 
     static void scanFile(File file) {
-        println '【spi-plugin】dirElementName: ' + file.name
         scanInputStream(new FileInputStream(file))
     }
 
@@ -64,7 +61,7 @@ class ScanUtil {
     }
 
     private static class ProvideClassVisitor extends ClassVisitor {
-        def mClassName
+        String mClassName
 
         ProvideClassVisitor(int api, ClassVisitor cv) {
             super(api, cv)
