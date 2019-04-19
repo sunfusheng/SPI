@@ -1,8 +1,8 @@
-package com.sunfusheng.spi.api;
+package com.sunfusheng.spi.core;
 
 /**
  * @author sunfusheng on 2019/3/16.
  */
-public interface ProvidersRegistry {
+interface ProvidersRegistry {
     void register(String key, String value);
 }

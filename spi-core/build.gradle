@@ -32,8 +32,8 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     userOrg = 'sfsheng0322'
     groupId = 'com.sunfusheng'
-    artifactId = 'spi-api'
+    artifactId = 'spi-core'
     publishVersion = VERSION_NAME
-    desc = 'SPI API'
+    desc = 'SPI Core'
     website = 'https://github.com/sunfusheng/SPI'
 }

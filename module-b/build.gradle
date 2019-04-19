@@ -22,13 +22,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
 
     if (isLocalDevelop.toBoolean()) {
-        implementation project(':spi-annotation')
-        implementation project(':spi-api')
-        annotationProcessor project(':spi-compiler')
+        implementation project(':spi-core')
     } else {
-        implementation 'com.sunfusheng:spi-annotation:' + VERSION_NAME
-        implementation 'com.sunfusheng:spi-api:' + VERSION_NAME
-        annotationProcessor 'com.sunfusheng:spi-compiler:' + VERSION_NAME
+        implementation 'com.sunfusheng:spi-core:' + VERSION_NAME
     }
 
     implementation project(':common-interfaces')

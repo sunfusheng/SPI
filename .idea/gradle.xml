@@ -12,9 +12,7 @@
             <option value="$PROJECT_DIR$/common-interfaces" />
             <option value="$PROJECT_DIR$/module-a" />
             <option value="$PROJECT_DIR$/module-b" />
-            <option value="$PROJECT_DIR$/spi-annotation" />
-            <option value="$PROJECT_DIR$/spi-api" />
-            <option value="$PROJECT_DIR$/spi-compiler" />
+            <option value="$PROJECT_DIR$/spi-core" />
             <option value="$PROJECT_DIR$/spi-plugin" />
           </set>
         </option>

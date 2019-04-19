@@ -9,14 +9,11 @@ import org.gradle.api.Project
  * @author by sunfusheng on 2019/3/19.
  */
 class RegisterPlugin implements Plugin<Project> {
-
     @Override
     void apply(Project project) {
-        def isApp = project.plugins.hasPlugin(AppPlugin.class)
-        if (isApp) {
-            println '【spi-plugin】is applied'
-            def android = project.extensions.findByType(AppExtension.class)
-            android.registerTransform(new RegisterTransform())
+        if (project.plugins.hasPlugin(AppPlugin.class)) {
+            println '【SPI】For more information, see https://github.com/sunfusheng/SPI.'
+            project.extensions.findByType(AppExtension.class).registerTransform(new RegisterTransform())
         }
     }
 }

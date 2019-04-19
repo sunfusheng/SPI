@@ -3,7 +3,7 @@ package com.sunfusheng.spi.module_b;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.sunfusheng.spi.annotation.Provide;
+import com.sunfusheng.spi.core.Provide;
 import com.sunfusheng.spi.module.interfaces.AbsMainFragment;
 
 /**
