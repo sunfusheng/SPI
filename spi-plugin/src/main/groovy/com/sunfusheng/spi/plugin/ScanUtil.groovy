@@ -34,9 +34,9 @@ class ScanUtil {
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = enumeration.nextElement()
                 String jarElementName = jarEntry.name
-                if (jarElementName.startsWith(RegisterCodeGenerator.GENERATE_TO_CLASS_NAME)) {
+                if (jarElementName.startsWith(CodeGeneratorUtil.GENERATE_TO_CLASS_NAME)) {
                     println '【SPI】Contains ServiceProvider.class, JarPath: ' + destFile.absolutePath
-                    RegisterCodeGenerator.mServiceProviderFile = destFile
+                    CodeGeneratorUtil.mServiceProviderFile = destFile
                 } else if (shouldProcessFile(jarElementName)) {
                     InputStream inputStream = jarFile.getInputStream(jarEntry)
                     scanInputStream(inputStream)
@@ -100,10 +100,10 @@ class ScanUtil {
                 }
                 String provider = mClassName.replace('/', '.')
 
-                Set<String> providersSet = RegisterCodeGenerator.mProvidersMap.get(key)
+                Set<String> providersSet = CodeGeneratorUtil.mProvidersMap.get(key)
                 if (providersSet == null) {
                     providersSet = new HashSet<>()
-                    RegisterCodeGenerator.mProvidersMap.put(key, providersSet)
+                    CodeGeneratorUtil.mProvidersMap.put(key, providersSet)
                 }
                 providersSet.add(provider)
             }

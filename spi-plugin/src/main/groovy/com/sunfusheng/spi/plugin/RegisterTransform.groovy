@@ -56,7 +56,7 @@ class RegisterTransform extends Transform {
                 FileUtils.copyDirectory(srcFile, destDir)
             }
         }
-        RegisterCodeGenerator.insertRegisterCode()
+        CodeGeneratorUtil.generateRegisterCode()
         println '【SPI】time used: ' + (System.currentTimeMillis() - startTime) + 'ms, classes scanned: ' + ScanUtil.classesScanned
         ScanUtil.classesScanned = 0
     }

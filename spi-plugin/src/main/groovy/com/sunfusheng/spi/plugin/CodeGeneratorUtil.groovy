@@ -11,14 +11,14 @@ import java.util.zip.ZipEntry
 /**
  * @author by sunfusheng on 2019/3/19
  */
-class RegisterCodeGenerator {
+class CodeGeneratorUtil {
     static final String GENERATE_TO_CLASS_NAME = 'com/sunfusheng/spi/core/ServiceProvider.class'
     static final String GENERATE_TO_METHOD_NAME = 'register'
 
     static File mServiceProviderFile = null
     static Map<String, Set<String>> mProvidersMap = new HashMap<>()
 
-    static void insertRegisterCode() {
+    static void generateRegisterCode() {
         if (mServiceProviderFile != null && mServiceProviderFile.name.endsWith(".jar") && mProvidersMap != null && mProvidersMap.size() > 0) {
             insertRegisterCodeIntoJarFile(mServiceProviderFile)
             mServiceProviderFile = null
@@ -96,10 +96,10 @@ class RegisterCodeGenerator {
                     Set<String> providersSet = entry.value
                     if (providersSet != null && providersSet.size() > 0) {
                         providersSet.each { provider ->
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/core/ProvidersPool", "registry", "Lcom/sunfusheng/spi/core/ProvidersRegistry;");
-                            mv.visitLdcInsn(key);
-                            mv.visitLdcInsn(provider);
-                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/sunfusheng/spi/core/ProvidersRegistry", "register", "(Ljava/lang/String;Ljava/lang/String;)V", true);
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/sunfusheng/spi/core/ProvidersPool", "registry", "Lcom/sunfusheng/spi/core/ProvidersRegistry;")
+                            mv.visitLdcInsn(key)
+                            mv.visitLdcInsn(provider)
+                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/sunfusheng/spi/core/ProvidersRegistry", "register", "(Ljava/lang/String;Ljava/lang/String;)V", true)
                         }
                     }
                 }
