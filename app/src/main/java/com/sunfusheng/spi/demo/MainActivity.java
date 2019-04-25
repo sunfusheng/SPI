@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         List<AbsMainFragment> mainFragments = ServiceProvider.getProviders(AbsMainFragment.class);
         sb.append("\n\n【AbsMainFragment Providers】: ");
+
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.root_container, fragment);
+//        fragmentTransaction.commit();
+
         for (AbsMainFragment fragment : mainFragments) {
             sb.append("\n").append(fragment.getClass().getSimpleName());
         }

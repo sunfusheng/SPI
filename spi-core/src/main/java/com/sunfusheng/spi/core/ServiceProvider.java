@@ -26,7 +26,6 @@ public class ServiceProvider {
     private static synchronized void register() {
     }
 
-
     @NonNull
     @SuppressWarnings("unchecked")
     public static <T> List<T> getProviders(Class<T> clazz) {
@@ -71,6 +70,14 @@ public class ServiceProvider {
             }
         }
         return providers;
+    }
+
+    public static <T> T getProvider(Class<T> clazz) {
+        List<T> providers = getProviders(clazz);
+        if (providers.size() > 0) {
+            return providers.get(0);
+        }
+        return null;
     }
 
     public static synchronized void destroy() {
