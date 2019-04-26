@@ -7,15 +7,15 @@ import android.support.v4.app.Fragment;
  */
 abstract public class AbsMainFragment extends Fragment {
 
-    protected String tabName() {
+    public String tabName() {
         return "Default Tab Name";
     }
 
-    protected int tabIcon() {
+    public int tabIcon() {
         return 0;
     }
 
-    protected boolean visible() {
+    public boolean visible() {
         return true;
     }
 }
