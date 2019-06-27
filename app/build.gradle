@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.sunfusheng.spi'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION
+    compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "com.sunfusheng.spi.demo"
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
-        versionCode VERSION_CODE
-        versionName VERSION_NAME
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
     }
 
     buildTypes {
@@ -21,13 +21,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
-    implementation 'com.android.support:design:' + SUPPORT_LIBRARY_VERSION
+    implementation 'com.android.support:appcompat-v7:' + support_library_version
+    implementation 'com.android.support:design:' + support_library_version
 
     if (isLocalDevelop.toBoolean()) {
         implementation project(':spi-core')
     } else {
-        implementation 'com.sunfusheng:spi-core:' + PUBLISHED_VERSION_NAME
+        implementation 'com.sunfusheng:spi-core:' + spi_version
     }
 
     implementation project(':common-interfaces')

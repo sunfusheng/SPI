@@ -14,7 +14,7 @@ if (isLocalDevelop.toBoolean()) {
             mavenDeployer {
                 pom.groupId = 'com.sunfusheng'
                 pom.artifactId = 'spi-plugin'
-                pom.version = VERSION_NAME
+                pom.version = spi_version
                 repository(url: uri('../local_maven'))
             }
         }
@@ -41,7 +41,7 @@ if (isLocalDevelop.toBoolean()) {
         userOrg = 'sfsheng0322'
         groupId = 'com.sunfusheng'
         artifactId = 'spi-plugin'
-        publishVersion = VERSION_NAME
+        publishVersion = spi_version
         desc = 'SPI Plugin'
         website = 'https://github.com/sunfusheng/SPI'
     }
