@@ -10,7 +10,7 @@ import org.apache.commons.io.FileUtils
 class RegisterTransform extends Transform {
     @Override
     String getName() {
-        return 'RegisterTransform'
+        return 'SPIRegisterTransform'
     }
 
     @Override
